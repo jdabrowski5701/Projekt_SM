@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#152366"
+    tools:context=".MainActivity">
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sm_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+
+
+    <!-- Przyciski -->
+    <Button
+        android:id="@+id/FirstButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Przycisk1"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/logoImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:backgroundTint="@color/lime"/>
+
+    <Button
+        android:id="@+id/SecondButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Przycisk2"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/FirstButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@color/lime"/>
+
+    <Button
+        android:id="@+id/ThirdButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Przycisk3"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/SecondButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@color/lime"/>
+
+    <Button
+        android:id="@+id/LastButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Przycisk4"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_below="@id/ThirdButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@color/lime"/>
+
+
+</RelativeLayout>
