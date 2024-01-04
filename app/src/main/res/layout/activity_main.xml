@@ -4,72 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#152366"
+    android:background="@color/app_background"
     tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
     <!-- Logo -->
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:src="@drawable/sm_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        style="@style/mainLogo"/>
 
 
 
     <!-- Przyciski -->
     <Button
-        android:id="@+id/FirstButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Przycisk1"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:id="@+id/NewFlashcardButton"
+        android:text="@string/new_flashcard_button"
         android:layout_below="@id/logoImageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        app:backgroundTint="@color/lime"
-        android:visibility="invisible"/>
+        style="@style/mainButton"
+        android:layout_marginTop="50dp"/>
 
     <Button
-        android:id="@+id/SecondButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Przycisk2"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_below="@id/FirstButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:backgroundTint="@color/lime"
-        android:visibility="invisible"/>
+        android:id="@+id/NewTestButton"
+        android:text="@string/new_test_button"
+        android:layout_below="@id/NewFlashcardButton"
+        style="@style/mainButton"/>
 
     <Button
-        android:id="@+id/ThirdButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Przycisk3"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_below="@id/SecondButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:backgroundTint="@color/lime"
-        android:visibility="invisible"/>
+        android:id="@+id/ProgressButton"
+        android:text="@string/progress_button"
+        android:layout_below="@id/NewTestButton"
+        style="@style/mainButton"/>
 
     <Button
-        android:id="@+id/LastButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Przycisk4"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_below="@id/ThirdButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:backgroundTint="@color/lime"
-        android:visibility="invisible"/>
+        android:id="@+id/NotesButton"
+        android:text="@string/notes_button"
+        android:layout_below="@id/ProgressButton"
+        style="@style/mainButton"/>
 
 
 </RelativeLayout>
