@@ -5,3 +5,19 @@ D
 app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
 ^
 .app/src/main/java/sm/projekt/MainActivity.java,c\6\c6008a6faa8abe70d137a38e56ea7c601b36ff9f
+e
+5app/src/main/java/sm/projekt/FlashcardRepository.java,b\2\b27caf1cdd1e2a25984ef80a86f42c039ad2c3f7
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+[
++app/src/main/java/sm/projekt/Flashcard.java,a\d\ad89ff43cbb3e0f52ec0dc864fb7c2a52343719c
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+c
+3app/src/main/java/sm/projekt/FlashcardDatabase.java,f\f\ffdded92bffc1fcec9c558c486830f648b995b66
+^
+.app/src/main/java/sm/projekt/FlashcardDao.java,d\7\d7b2cd9f26091e0e05731393d4424ccb7a479c4b
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+d
+4app/src/main/java/sm/projekt/FlashcardViewModel.java,3\6\36c143826e5b3dbe28b0e3c70d6f9e34c8a26e1a
