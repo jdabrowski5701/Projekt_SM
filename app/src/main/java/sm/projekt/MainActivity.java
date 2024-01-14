@@ -117,5 +117,13 @@ public class MainActivity extends AppCompatActivity {
                 lastButton.startAnimation(buttonAnimation);
             }
         }, 4200);
+
+        firstButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

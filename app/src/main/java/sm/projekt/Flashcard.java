@@ -12,7 +12,11 @@ public class Flashcard {
     private String category;
     private boolean isAnsweredCorrectly = false;
 
-
+    public Flashcard() {
+    this.question = "aa";
+    this.answer = "aaa";
+    this.category = "category";
+    }
     //Gettery i Settery
     public int getId() {
         return id;

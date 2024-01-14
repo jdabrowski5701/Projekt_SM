@@ -1,6 +1,7 @@
 package sm.projekt;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -20,6 +21,10 @@ public class FlashcardRepository {
 
     void insert(Flashcard flashcard){
         FlashcardDatabase.databaseWriteExecutor.execute(() -> flashcardDao.insert(flashcard));
+        Log.d("FlashcardRepository", "Flashcard inserted: " + flashcard.getQuestion());
+        Log.d("FlashcardRepository", "Flashcard id: " + flashcard.getId());
+        Log.d("FlashcardRepository", "Flashcard category: " + flashcard.getCategory());
+
     }
 
     void update(Flashcard flashcard){
