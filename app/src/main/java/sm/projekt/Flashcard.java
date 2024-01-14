@@ -1,10 +1,13 @@
 package sm.projekt;
 
+import androidx.databinding.BaseObservable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "flashcard")
-public class Flashcard {
+public class Flashcard extends BaseObservable {
+    @ColumnInfo(name = "item_id")
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String question;
