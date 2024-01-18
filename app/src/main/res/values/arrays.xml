@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_array">
+        <item>Select Category</item>  <!-- This is your hint -->
+        <item>angielski podstawowy</item>
+        <item>polski podstawowy</item>
+    </string-array>
+    <string-array name="category_array_without_hint">
+        <item>angielski podstawowy</item>
+        <item>polski podstawowy</item>
+    </string-array>
+
+</resources>
