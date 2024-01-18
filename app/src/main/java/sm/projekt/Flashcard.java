@@ -16,9 +16,11 @@ public class Flashcard extends BaseObservable {
     private boolean isAnsweredCorrectly = false;
 
     public Flashcard() {
-    this.question = "aa";
-    this.answer = "aaa";
-    this.category = "category";
+        // Default ID, assuming 0 is a valid default for a non-set ID.
+        this.question = ""; // Empty string as default
+        this.answer = ""; // Empty string as default
+        this.category = ""; // Empty string as default
+        // Default value
     }
     //Gettery i Settery
     public int getId() {

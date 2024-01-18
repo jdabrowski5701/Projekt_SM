@@ -21,3 +21,9 @@ P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 d
 4app/src/main/java/sm/projekt/FlashcardViewModel.java,3\6\36c143826e5b3dbe28b0e3c70d6f9e34c8a26e1a
+b
+2app/src/main/java/sm/projekt/FlashcardAdapter.java,5\1\51303170151385d60e7a0de0c00325592bb44040
+h
+8app/src/main/java/sm/projekt/ViewFlashcardsActivity.java,4\9\494072144ef5f94442986c32c6d553a1a9c17506
+f
+6app/src/main/java/sm/projekt/AddFlashcardActivity.java,2\f\2ff7ef9f7eb6866dcfc95315ec6e78b077a0a3c4

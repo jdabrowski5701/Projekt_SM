@@ -16,6 +16,9 @@
             android:name=".AddFlashcardActivity"
             android:exported="false" />
         <activity
+            android:name=".ViewFlashcardsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

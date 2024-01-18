@@ -2,26 +2,51 @@ package sm.projekt;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.graphics.Color;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddFlashcardActivity extends AppCompatActivity {
 
     private EditText editTextQuestion, editTextAnswer;
+    private Spinner spinnerCategory;
     private Button buttonSave;
+
+    private AdapterView.OnItemSelectedListener OnCatSpinnerCL = new AdapterView.OnItemSelectedListener() {
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            int hintColor = getResources().getColor(R.color.hint_color);
+            ((TextView) parent.getChildAt(0)).setTextColor(hintColor);
+
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Optional: handle case where nothing is selected
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_flashcard); // Upewnij się, że używasz właściwego ID layoutu
+        setContentView(R.layout.activity_add_flashcard);
 
-        // Inicjalizacja komponentów interfejsu użytkownika
         editTextQuestion = findViewById(R.id.editTextQuestion);
         editTextAnswer = findViewById(R.id.editTextAnswer);
+        spinnerCategory = findViewById(R.id.spinnerCategory);
         buttonSave = findViewById(R.id.buttonSave);
 
-        // Ustawienie słuchacza kliknięć dla przycisku zapisu
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(adapter);
+
+        spinnerCategory.setOnItemSelectedListener(OnCatSpinnerCL);
+
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,27 +56,23 @@ public class AddFlashcardActivity extends AppCompatActivity {
     }
 
     private void saveFlashcard() {
-        // Pobranie danych z pól tekstowych
         String question = editTextQuestion.getText().toString().trim();
         String answer = editTextAnswer.getText().toString().trim();
+        String category = spinnerCategory.getSelectedItem().toString();
 
-        // Walidacja danych
         if (question.isEmpty() || answer.isEmpty()) {
-            // Pokaż komunikat błędu, jeśli pytanie lub odpowiedź są puste
-            // Toast.makeText(this, "Proszę wprowadzić pytanie i odpowiedź", Toast.LENGTH_SHORT).show();
+            // Handle empty inputs
             return;
         }
 
-        // Utworzenie obiektu Flashcard
         Flashcard flashcard = new Flashcard();
         flashcard.setQuestion(question);
         flashcard.setAnswer(answer);
+        flashcard.setCategory(category);
 
-        // Zapis fiszki w bazie danych
         FlashcardRepository repository = new FlashcardRepository(getApplication());
         repository.insert(flashcard);
 
-        // Opcjonalnie: Zamknięcie aktywności po zapisaniu fiszki
-        finish();
+        finish(); // Close the activity
     }
 }

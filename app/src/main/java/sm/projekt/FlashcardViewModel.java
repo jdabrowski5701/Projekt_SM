@@ -18,6 +18,10 @@ public class FlashcardViewModel extends AndroidViewModel {
         flashcards = flashcardRepository.findAllFlashcards();
     }
 
+
+  /*  public LiveData<List<Flashcard>> getFlashcards() {
+        return flashcardRepository.getAllFlashcards();
+    }*/
     public LiveData<List<Flashcard>> findAll(){ return flashcards; }
     public void insert(Flashcard flashcard){flashcardRepository.insert(flashcard);}
     public void update(Flashcard flashcard){flashcardRepository.update(flashcard);}

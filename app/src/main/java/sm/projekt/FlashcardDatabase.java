@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Flashcard.class}, version = 1, exportSchema = false)
+@Database(entities = {Flashcard.class}, version = 2, exportSchema = false)
 public abstract class FlashcardDatabase extends RoomDatabase {
     private static FlashcardDatabase databaseInstance;
     static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
@@ -20,6 +20,7 @@ public abstract class FlashcardDatabase extends RoomDatabase {
         if(databaseInstance == null){
             databaseInstance = Room.databaseBuilder(context.getApplicationContext(),
                     FlashcardDatabase.class, "flashcard_database")
+                    .fallbackToDestructiveMigration()
                     .build();
         }
         return databaseInstance;
