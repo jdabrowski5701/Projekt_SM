@@ -17,7 +17,13 @@ public class FlashcardViewModel extends AndroidViewModel {
         flashcardRepository = new FlashcardRepository(application);
         flashcards = flashcardRepository.findAllFlashcards();
     }
+    LiveData<List<Flashcard>> getAllFlashcards() {
+        return flashcards;
+    }
 
+    RandomFlashcardIterator getRandomFlashcardIterator() {
+        return flashcardRepository.getRandomFlashcardIterator();
+    }
 
   /*  public LiveData<List<Flashcard>> getFlashcards() {
         return flashcardRepository.getAllFlashcards();

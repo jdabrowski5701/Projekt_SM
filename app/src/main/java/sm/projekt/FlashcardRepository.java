@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlashcardRepository {
@@ -15,6 +16,12 @@ public class FlashcardRepository {
         FlashcardDatabase database = FlashcardDatabase.getDatabase(application);
         flashcardDao = database.flashcardDao();
         flashcards = flashcardDao.findAll();
+    }
+
+    public RandomFlashcardIterator getRandomFlashcardIterator() {
+        List<Flashcard> flashcards = findAllFlashcards().getValue();
+        if (flashcards == null) flashcards = new ArrayList<>();
+        return new RandomFlashcardIterator(flashcards);
     }
 
     LiveData<List<Flashcard>> findAllFlashcards(){
@@ -56,10 +63,10 @@ public class FlashcardRepository {
         FlashcardDatabase.databaseWriteExecutor.execute(() -> flashcardDao.delete(flashcard));
     }
 
-    public LiveData<List<Flashcard>> getAllFlashcards() {
+  /*  public LiveData<List<Flashcard>> getAllFlashcards() {
 
         Log.d("FlashcardRepository", "getAllFlashcards()");
         return flashcardDao.findAll();
-    }
+    }*/
 
 }
