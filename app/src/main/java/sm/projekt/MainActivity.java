@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
@@ -16,9 +17,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Spinner;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -129,9 +132,34 @@ public class MainActivity extends AppCompatActivity {
         secondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ViewFlashcardsActivity.class);
-                startActivity(intent);
+                showCategorySelectionDialog();
             }
         });
+    }
+    private void showCategorySelectionDialog() {
+        // Create a dialog and set its content to a custom layout that includes your Spinner and Button
+        Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.dialog_select_category); // Make sure to create this layout
+
+        Spinner spinnerCategories = dialog.findViewById(R.id.spinnerCategories);
+        Button buttonStartTest = dialog.findViewById(R.id.buttonStartTest);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategories.setAdapter(adapter);
+
+        buttonStartTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String selectedCategory = spinnerCategories.getSelectedItem().toString();
+                Intent intent = new Intent(MainActivity.this, ViewFlashcardsActivity.class);
+                intent.putExtra("SELECTED_CATEGORY", selectedCategory);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

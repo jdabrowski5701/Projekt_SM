@@ -19,6 +19,8 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_flashcards);
 
+        String selectedCategory = getIntent().getStringExtra("SELECTED_CATEGORY");
+
         RecyclerView recyclerView = findViewById(R.id.recyclerViewFlashcards);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
