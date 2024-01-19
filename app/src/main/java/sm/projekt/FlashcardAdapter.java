@@ -3,6 +3,7 @@ package sm.projekt;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +29,7 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
         Flashcard flashcard = flashcards.get(position);
         holder.textViewQuestion.setText(flashcard.getQuestion());
         holder.textViewAnswer.setText(flashcard.getAnswer());
-        holder.textViewCategory.setText(flashcard.getCategory());
+        //holder.textViewCategory.setText(flashcard.getCategory());
         // Add more bindings if you have more data to display
     }
 
@@ -39,13 +40,31 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
 
     static class FlashcardViewHolder extends RecyclerView.ViewHolder {
         TextView textViewQuestion, textViewAnswer, textViewCategory;
-
+     //   Button buttonNext;
         FlashcardViewHolder(View itemView) {
             super(itemView);
             textViewQuestion = itemView.findViewById(R.id.textViewQuestion);
             textViewAnswer = itemView.findViewById(R.id.textViewAnswer);
-            textViewCategory = itemView.findViewById(R.id.textViewCategory);
+           // textViewCategory = itemView.findViewById(R.id.textViewCategory);
+           // buttonNext = itemView.findViewById(R.id.buttonNext);
+            textViewAnswer.setVisibility(View.GONE);
             // Initialize other views from the flashcard_item layout
+            textViewQuestion.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean isAnswerVisible = textViewAnswer.getVisibility() == View.VISIBLE;
+                    textViewQuestion.setVisibility(isAnswerVisible ? View.VISIBLE : View.GONE);
+                    textViewAnswer.setVisibility(isAnswerVisible ? View.GONE : View.VISIBLE);
+                }
+            });
+            textViewAnswer.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean isAnswerVisible = textViewAnswer.getVisibility() == View.VISIBLE;
+                    textViewQuestion.setVisibility(isAnswerVisible ? View.VISIBLE : View.GONE);
+                    textViewAnswer.setVisibility(isAnswerVisible ? View.GONE : View.VISIBLE);
+                }
+            });
         }
     }
     public void setFlashcards(List<Flashcard> newFlashcards) {

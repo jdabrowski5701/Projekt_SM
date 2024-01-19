@@ -62,4 +62,5 @@ public class Flashcard extends BaseObservable {
     public void setAnsweredCorrectly(boolean answeredCorrectly) {
         isAnsweredCorrectly = answeredCorrectly;
     }
+
 }

@@ -4,9 +4,11 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 
 public class FlashcardRepository {
     private final FlashcardDao flashcardDao;
@@ -18,9 +20,18 @@ public class FlashcardRepository {
         flashcards = flashcardDao.findAll();
     }
 
-    public RandomFlashcardIterator getRandomFlashcardIterator() {
-        List<Flashcard> flashcards = findAllFlashcards().getValue();
-        if (flashcards == null) flashcards = new ArrayList<>();
+    public RandomFlashcardIterator getRandomFlashcardIteratorByCategory(String category) {
+        LiveData<List<Flashcard>> flashcardsLiveData = findFlashcardsByCategory(category);
+
+        Log.d("FlashcardRepository", "getRandomFlashcardIterator");
+
+        List<Flashcard> flashcards = flashcardsLiveData.getValue();
+        if (flashcards == null) {
+            flashcards = new ArrayList<>();
+            Log.d("FlashcardRepository", "No flashcards found in category.");
+        } else {
+            Log.d("FlashcardRepository", "Number of flashcards found: " + flashcards.size());
+        }
         return new RandomFlashcardIterator(flashcards);
     }
 
@@ -29,6 +40,21 @@ public class FlashcardRepository {
          return flashcards;
        // return flashcardDao.findAll();
          }
+    public LiveData<List<Flashcard>> findFlashcardsByCategory(String category) {
+        MutableLiveData<List<Flashcard>> liveData = new MutableLiveData<>();
+
+        FlashcardDatabase.databaseWriteExecutor.execute(() -> {
+            try {
+                List<Flashcard> flashcards = flashcardDao.findFlashcardWithCategory(category);
+                liveData.postValue(flashcards);
+            } catch (Exception e) {
+                Log.e("FlashcardRepository", "Error finding flashcards by category", e);
+                liveData.postValue(new ArrayList<>()); // Return an empty list in case of error
+            }
+        });
+
+        return liveData;
+    }
 
   /*  void insert(Flashcard flashcard){
         FlashcardDatabase.databaseWriteExecutor.execute(() -> flashcardDao.insert(flashcard));

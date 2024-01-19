@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -21,8 +22,11 @@ public class FlashcardViewModel extends AndroidViewModel {
         return flashcards;
     }
 
-    RandomFlashcardIterator getRandomFlashcardIterator() {
-        return flashcardRepository.getRandomFlashcardIterator();
+    public RandomFlashcardIterator getRandomFlashcardIteratorByCategory(String category) {
+        return flashcardRepository.getRandomFlashcardIteratorByCategory(category);
+    }
+    public LiveData<List<Flashcard>> getFlashcardsByCategory(String category) {
+        return flashcardRepository.findFlashcardsByCategory(category);
     }
 
   /*  public LiveData<List<Flashcard>> getFlashcards() {

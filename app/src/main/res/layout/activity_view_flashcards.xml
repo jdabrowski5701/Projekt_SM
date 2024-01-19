@@ -3,12 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/app_background"
-    >
+    android:background="@color/app_background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFlashcards"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/> <!-- Assign weight for the RecyclerView -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:id="@+id/buttonDontKnow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="40sp"
+            android:textColor="@color/red"
+            android:text="I Don't Know" />
+
+        <!-- Button "Next" -->
+        <Button
+            android:id="@+id/buttonKnow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="40sp"
+            android:textColor="@color/green"
+            android:text="I know" />
+
 </LinearLayout>
 
+</LinearLayout>
