@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lime">#DBDC00</color>
     <color name="app_background">#152366</color>
+    <color name="hint_color">#5F6480</color>
 </resources>

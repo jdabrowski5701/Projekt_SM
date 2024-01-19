@@ -163,6 +163,23 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 4200);
 
+
+        firstButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        secondButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ViewFlashcardsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void setStartOffsetForButton(Button button, int startOffset) {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) button.getLayoutParams();
@@ -193,5 +210,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
     }
 }

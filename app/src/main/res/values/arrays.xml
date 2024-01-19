@@ -10,4 +10,14 @@
         <item>ic_en_foreground</item>
         <item>ic_exit</item>
     </string-array>
+
+    <string-array name="category_array">
+        <item>Select Category</item>
+        <item>angielski podstawowy</item>
+        <item>polski podstawowy</item>
+    </string-array>
+    <string-array name="category_array_without_hint">
+        <item>angielski podstawowy</item>
+        <item>polski podstawowy</item>
+    </string-array>
 </resources>
