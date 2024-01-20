@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dialog.show();
-
+    }
         private void setStartOffsetForButton (Button button,int startOffset){
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) button.getLayoutParams();
             params.setMargins(startOffset, 0, 0, 0);
@@ -239,4 +239,4 @@ public class MainActivity extends AppCompatActivity {
             resources.updateConfiguration(configuration, resources.getDisplayMetrics());
         }
     }
-}
+
