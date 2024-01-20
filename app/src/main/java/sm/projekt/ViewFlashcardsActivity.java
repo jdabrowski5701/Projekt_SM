@@ -24,7 +24,8 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
     private RandomFlashcardIterator flashcardIterator;
     private Flashcard currentFlashcard;
     private List<Flashcard> falseAnswered;
-    private AtomicInteger answeredCorrectly, flashcardsAmount;
+    private AtomicInteger flashcardsAmount;
+    private int answeredCorrectly;
     private Button buttonDontKnow;
     private Button buttonKnow;
     @Override
@@ -43,10 +44,27 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         falseAnswered = new ArrayList<>();
         buttonKnow = findViewById(R.id.buttonKnow);
-        answeredCorrectly= new AtomicInteger();
+        answeredCorrectly = 0;
         flashcardsAmount = new AtomicInteger();
+
+        viewModel.getFlashcardsByCategory(selectedCategory).observe(this, flashcards -> {
+            if (flashcards != null && !flashcards.isEmpty()) {
+                Log.d("ViewFlashcardsActivity", "Number of flashcards found: " + flashcards.size());
+                flashcardsAmount.set(flashcards.size());
+               // answeredCorrectly.set(flashcards.size());
+                flashcardIterator = new RandomFlashcardIterator(flashcards);
+                falseAnswered = new ArrayList<>(flashcards);
+                displayNextFlashcard();
+            } else {
+                Log.d("ViewFlashcardsActivity", "No flashcards found in category.");
+            }
+
+        });
+
         buttonKnow.setOnClickListener(v -> {
             currentFlashcard.setAnsweredCorrectly(true);
+            //falseAnswered.remove(currentFlashcard);
+            answeredCorrectly++;
             Log.d("ViewFlashcardActivity", "currentFlashcard.getAnsweredCorrectly: " + currentFlashcard.isAnsweredCorrectly());
             displayNextFlashcard();
         });
@@ -57,21 +75,9 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
         buttonDontKnow.setOnClickListener(v -> {
             currentFlashcard.setAnsweredCorrectly(false);
             Log.d("ViewFlashcardActivity", "currentFlashcard.getAnsweredCorrectly: " + currentFlashcard.isAnsweredCorrectly());
-            falseAnswered.add(currentFlashcard);
-            answeredCorrectly.decrementAndGet();
+           // falseAnswered.add(currentFlashcard);
+            //answeredCorrectly.decrementAndGet();
             displayNextFlashcard();
-        });
-        viewModel.getFlashcardsByCategory(selectedCategory).observe(this, flashcards -> {
-            if (flashcards != null && !flashcards.isEmpty()) {
-                Log.d("ViewFlashcardsActivity", "Number of flashcards found: " + flashcards.size());
-                flashcardsAmount.set(flashcards.size());
-                answeredCorrectly.set(flashcards.size());
-                flashcardIterator = new RandomFlashcardIterator(flashcards);
-                displayNextFlashcard();
-            } else {
-                Log.d("ViewFlashcardsActivity", "No flashcards found in category.");
-            }
-
         });
     }
 
@@ -99,7 +105,19 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
     }
 
     private void displayIncorrectlyAnsweredFlashcards() {
+        List<Flashcard> tempAnsweredCorrectly= new ArrayList<>();
+
         // Check if there are incorrectly answered flashcards
+        for(Flashcard flashcard: falseAnswered) {
+            if(flashcard.isAnsweredCorrectly()) {
+                tempAnsweredCorrectly.add(flashcard);
+            }
+        }
+
+        falseAnswered.removeAll(tempAnsweredCorrectly);
+
+
+
         if (falseAnswered != null && !falseAnswered.isEmpty()){
             // Update the adapter with the list of incorrectly answered flashcards
 
@@ -113,11 +131,11 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
 
             // Optionally, show a message or update the UI to indicate the test has ended
             // Example: Show a Toast message
-            Toast.makeText(this, "You scored " + answeredCorrectly.get() + "/" + flashcardsAmount.get() , Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Review these flashcards", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You scored " + answeredCorrectly + "/" + flashcardsAmount.get() + "Learn remaining flashcards" , Toast.LENGTH_SHORT).show();
+
 
             flashcardsAmount.set(falseAnswered.size());
-            answeredCorrectly.set(falseAnswered.size());
+           // answeredCorrectly.set(falseAnswered.size());
             flashcardIterator = new RandomFlashcardIterator(falseAnswered);
             displayNextFlashcard();
 
@@ -135,6 +153,7 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
                 }
             }, Toast.LENGTH_SHORT); // The delay is the duration of the length short toast
         }
+        answeredCorrectly=0;
 
     }
 
