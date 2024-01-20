@@ -13,6 +13,23 @@
         android:theme="@style/Theme.Projekt_SM"
         tools:targetApi="31">
         <activity
+            android:name=".EditNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NoteActivity"
+            android:exported="false"
+            android:label="@string/title_activity_note"
+            android:theme="@style/Theme.Projekt_SM" />
+        <activity
+            android:name=".NoteDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NoteDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddFlashcardActivity"
             android:exported="false" />
         <activity

@@ -5,4 +5,10 @@
     <string name="new_test_button">New Test</string>
     <string name="progress_button">Progress</string>
     <string name="notes_button">Notes</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Note not saved because there are empty fields.</string>
+    <string name="hint_note_title">Title...</string>
+    <string name="hint_note_content">Content...</string>
+    <string name="note_added">Note added.</string>
+    <string name="note_edited">Note edited.</string>
 </resources>

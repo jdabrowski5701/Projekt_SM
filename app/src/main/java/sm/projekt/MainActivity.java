@@ -180,6 +180,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        lastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class );
+                startActivity(intent);
+            }
+        });
+
     }
     private void setStartOffsetForButton(Button button, int startOffset) {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) button.getLayoutParams();
