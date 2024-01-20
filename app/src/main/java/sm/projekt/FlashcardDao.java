@@ -14,7 +14,7 @@ import java.util.List;
 public interface FlashcardDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Flashcard flashcard);
+    long insert(Flashcard flashcard);
 
     @Update
     void update(Flashcard flashcard);

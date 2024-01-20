@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -20,10 +21,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
 
 import java.util.Locale;
 
@@ -163,35 +166,77 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 4200);
 
+        firstButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        secondButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCategorySelectionDialog();
+            }
+        });
     }
-    private void setStartOffsetForButton(Button button, int startOffset) {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) button.getLayoutParams();
-        params.setMargins(startOffset, 0, 0, 0);
-        button.setLayoutParams(params);
-    }
 
-    private void setLocale(String languageCode) {
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .edit()
-                .putString("language", languageCode)
-                .apply();
+    private void showCategorySelectionDialog() {
+        // Create a dialog and set its content to a custom layout that includes your Spinner and Button
+        Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.dialog_select_category); // Make sure to create this layout
 
-        updateLocale(languageCode);
-        recreate();
-    }
-    private void updateLocale(String languageCode) {
-        Locale newLocale = new Locale(languageCode);
-        Locale.setDefault(newLocale);
+        Spinner spinnerCategories = dialog.findViewById(R.id.spinnerCategories);
+        Button buttonStartTest = dialog.findViewById(R.id.buttonStartTest);
 
-        Resources resources = getResources();
-        Configuration configuration = new Configuration(resources.getConfiguration());
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategories.setAdapter(adapter);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            configuration.setLocale(newLocale);
-        } else {
-            configuration.locale = newLocale;
+        buttonStartTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String selectedCategory = spinnerCategories.getSelectedItem().toString();
+                Intent intent = new Intent(MainActivity.this, ViewFlashcardsActivity.class);
+                intent.putExtra("SELECTED_CATEGORY", selectedCategory);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+        private void setStartOffsetForButton (Button button,int startOffset){
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) button.getLayoutParams();
+            params.setMargins(startOffset, 0, 0, 0);
+            button.setLayoutParams(params);
         }
 
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        private void setLocale (String languageCode){
+            PreferenceManager.getDefaultSharedPreferences(this)
+                    .edit()
+                    .putString("language", languageCode)
+                    .apply();
+
+            updateLocale(languageCode);
+            recreate();
+        }
+        private void updateLocale (String languageCode){
+            Locale newLocale = new Locale(languageCode);
+            Locale.setDefault(newLocale);
+
+            Resources resources = getResources();
+            Configuration configuration = new Configuration(resources.getConfiguration());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                configuration.setLocale(newLocale);
+            } else {
+                configuration.locale = newLocale;
+            }
+
+            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+        }
     }
 }

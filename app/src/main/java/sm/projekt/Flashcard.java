@@ -1,10 +1,13 @@
 package sm.projekt;
 
+import androidx.databinding.BaseObservable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "flashcard")
-public class Flashcard {
+public class Flashcard extends BaseObservable {
+    @ColumnInfo(name = "item_id")
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String question;
@@ -12,7 +15,13 @@ public class Flashcard {
     private String category;
     private boolean isAnsweredCorrectly = false;
 
-
+    public Flashcard() {
+        // Default ID, assuming 0 is a valid default for a non-set ID.
+        this.question = ""; // Empty string as default
+        this.answer = ""; // Empty string as default
+        this.category = ""; // Empty string as default
+        // Default value
+    }
     //Gettery i Settery
     public int getId() {
         return id;
@@ -53,4 +62,5 @@ public class Flashcard {
     public void setAnsweredCorrectly(boolean answeredCorrectly) {
         isAnsweredCorrectly = answeredCorrectly;
     }
+
 }
