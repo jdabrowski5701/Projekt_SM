@@ -24,4 +24,10 @@ public class RandomFlashcardIterator implements Iterator<Flashcard> {
     public Flashcard next() {
         return flashcardList.get(currentIndex++);
     }
+
+    public List<Flashcard> getAll() { return flashcardList;}
+
+    public int getSizeFlashcardList() {
+        return flashcardList.size();
+    }
 }

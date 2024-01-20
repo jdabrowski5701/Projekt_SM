@@ -21,9 +21,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textColor="@color/red"
-            android:text="I Don't Know" />
+            android:text="I Don't Know"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <!-- Button "Next" -->
         <Button
@@ -31,9 +32,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:textColor="@color/green"
-            android:text="I know" />
+            android:text="I know"
+            style="?android:attr/buttonBarButtonStyle" />
 
 </LinearLayout>
 
