@@ -1,8 +1,10 @@
 
 J
-java:S1604"(Make this anonymous inner class a lambda(ƒ×œîùÿÿÿÿ8™êÄÀĞ1
+java:S16042"(Make this anonymous inner class a lambda(ƒ×œîùÿÿÿÿ8™êÄÀĞ1
+t	java:S116"YRename this field "OnCatSpinnerCL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…£¤8¦Ï×Ò1
 N
-java:S1659",Declare "editTextAnswer" on a separate line.(åœÅÀşÿÿÿÿ8ëêÄÀĞ1
+java:S1659",Declare "editTextAnswer" on a separate line.(åœÅÀşÿÿÿÿ8ëêÄÀĞ1
 {
-java:S1450"YRemove the "buttonSave" field and declare it as a local variable in the relevant methods.(™‚€˜úÿÿÿÿ8ìêÄÀĞ1
-X	java:S125*"<This block of commented-out lines of code should be removed.(ÿÒî8ùêÄÀĞ1
+java:S1450"YRemove the "buttonSave" field and declare it as a local variable in the relevant methods.(™‚€˜úÿÿÿÿ8ìêÄÀĞ1
+M
+java:S1874"0Remove this use of "getColor"; it is deprecated.(Î™Â‹8ÃÏ×Ò1

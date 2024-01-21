@@ -165,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                 lastButton.startAnimation(buttonAnimation);
             }
         }, 4200);
-
         firstButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,6 +179,16 @@ public class MainActivity extends AppCompatActivity {
                 showCategorySelectionDialog();
             }
         });
+
+        lastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class );
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void showCategorySelectionDialog() {
@@ -239,4 +248,5 @@ public class MainActivity extends AppCompatActivity {
             resources.updateConfiguration(configuration, resources.getDisplayMetrics());
         }
     }
+}
 

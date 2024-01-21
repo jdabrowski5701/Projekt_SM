@@ -12,7 +12,7 @@
     </string-array>
 
     <string-array name="category_array">
-        <item>Select Category</item>  <!-- This is your hint -->
+        <item>Select Category</item>
         <item>angielski podstawowy</item>
         <item>polski podstawowy</item>
     </string-array>
