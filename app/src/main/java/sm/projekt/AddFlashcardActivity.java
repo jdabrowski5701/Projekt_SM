@@ -17,12 +17,12 @@ public class AddFlashcardActivity extends AppCompatActivity {
     private EditText editTextQuestion, editTextAnswer;
     private Spinner spinnerCategory;
     private Button buttonSave;
+    private Flashcard prototypeFlashcard;
 
     private AdapterView.OnItemSelectedListener OnCatSpinnerCL = new AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             int hintColor = getResources().getColor(R.color.hint_color);
             ((TextView) parent.getChildAt(0)).setTextColor(hintColor);
-
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
@@ -39,12 +39,12 @@ public class AddFlashcardActivity extends AppCompatActivity {
         editTextAnswer = findViewById(R.id.editTextAnswer);
         spinnerCategory = findViewById(R.id.spinnerCategory);
         buttonSave = findViewById(R.id.buttonSave);
+        prototypeFlashcard = new Flashcard();
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.category_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(adapter);
-
         spinnerCategory.setOnItemSelectedListener(OnCatSpinnerCL);
 
         buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +65,7 @@ public class AddFlashcardActivity extends AppCompatActivity {
             return;
         }
 
-        Flashcard flashcard = new Flashcard();
+        Flashcard flashcard = prototypeFlashcard.clone();
         flashcard.setQuestion(question);
         flashcard.setAnswer(answer);
         flashcard.setCategory(category);

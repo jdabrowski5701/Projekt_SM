@@ -13,17 +13,16 @@ import java.util.concurrent.Future;
 public class FlashcardRepository {
     private final FlashcardDao flashcardDao;
     private final LiveData<List<Flashcard>> flashcards;
-
+    private final ScoreDao scoreDao;
     FlashcardRepository(Application application){
         FlashcardDatabase database = FlashcardDatabase.getDatabase(application);
         flashcardDao = database.flashcardDao();
+        scoreDao = database.scoreDao();
         flashcards = flashcardDao.findAll();
     }
 
     public RandomFlashcardIterator getRandomFlashcardIteratorByCategory(String category) {
         LiveData<List<Flashcard>> flashcardsLiveData = findFlashcardsByCategory(category);
-
-        Log.d("FlashcardRepository", "getRandomFlashcardIterator");
 
         List<Flashcard> flashcards = flashcardsLiveData.getValue();
         if (flashcards == null) {
@@ -38,8 +37,8 @@ public class FlashcardRepository {
     LiveData<List<Flashcard>> findAllFlashcards(){
         Log.d("FlashcardRepository", "findAllFlashcards");
          return flashcards;
-       // return flashcardDao.findAll();
          }
+
     public LiveData<List<Flashcard>> findFlashcardsByCategory(String category) {
         MutableLiveData<List<Flashcard>> liveData = new MutableLiveData<>();
 
@@ -56,24 +55,11 @@ public class FlashcardRepository {
         return liveData;
     }
 
-  /*  void insert(Flashcard flashcard){
-        FlashcardDatabase.databaseWriteExecutor.execute(() -> flashcardDao.insert(flashcard));
-        Log.d("FlashcardRepository", "Flashcard inserted: " + flashcard.getQuestion());
-        //Log.d("FlashcardRepository", "Flashcard id: " + flashcardDao.insert(flashcard));
-        Log.d("FlashcardRepository", "Flashcard category: " + flashcard.getCategory());
-        long id = FlashcardDatabase.databaseWriteExecutor.submit(() -> flashcardDao.insert(flashcard)).get();
-        Log.d("FlashcardRepository", "Flashcard inserted ID: " + id);
-
-
-    }*/
   void insert(Flashcard flashcard){
       FlashcardDatabase.databaseWriteExecutor.execute(() -> {
           try {
-              long id = flashcardDao.insert(flashcard);
-              Log.d("FlashcardRepository", "Flashcard inserted ID: " + id);
-              Log.d("FlashcardRepository", "Flashcard question: " + flashcard.getQuestion());
+              flashcardDao.insert(flashcard);
               Log.d("FlashcardRepository", "Flashcard answer: " + flashcard.getAnswer());
-              Log.d("FlashcardRepository", "Flashcard category " + flashcard.getCategory());
           } catch (Exception e) {
               Log.e("FlashcardRepository", "Error inserting flashcard", e);
           }
@@ -89,10 +75,16 @@ public class FlashcardRepository {
         FlashcardDatabase.databaseWriteExecutor.execute(() -> flashcardDao.delete(flashcard));
     }
 
-  /*  public LiveData<List<Flashcard>> getAllFlashcards() {
+    public void insertScore(Score score){
+        FlashcardDatabase.databaseWriteExecutor.execute(() -> scoreDao.insert(score));
+    }
 
-        Log.d("FlashcardRepository", "getAllFlashcards()");
-        return flashcardDao.findAll();
-    }*/
+    public LiveData<Score> getLastScore(){
+        return scoreDao.getLastScore();
+    }
+
+    public LiveData<List<Score>> getAllScores() {
+        return scoreDao.getAllScores();
+    }
 
 }

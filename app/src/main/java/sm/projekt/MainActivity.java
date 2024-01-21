@@ -132,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
             // Obsługa orientacji pionowej
             buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_slide_up);
         }
+        displayMenu(logoImageView,firstButton,secondButton,thirdButton,lastButton,buttonAnimation);
+    }
+
+    private void displayMenu(ImageView logoImageView,Button firstButton,Button secondButton,Button thirdButton,Button lastButton, Animation buttonAnimation) {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -165,19 +169,17 @@ public class MainActivity extends AppCompatActivity {
                 lastButton.startAnimation(buttonAnimation);
             }
         }, 4200);
-        firstButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
-                startActivity(intent);
-            }
+
+        firstButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
+            startActivity(intent);
         });
 
-        secondButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCategorySelectionDialog();
-            }
+        secondButton.setOnClickListener(v -> showCategorySelectionDialog());
+
+        thirdButton.setOnClickListener(v -> {
+         Intent intent = new Intent(MainActivity.this, ProgressActivity.class);
+         startActivity(intent);
         });
 
         lastButton.setOnClickListener(new View.OnClickListener() {
