@@ -89,10 +89,11 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
 
     private void displayIncorrectlyAnsweredFlashcards() {
         if(iterationNumber==1) {
-
+            String category = currentFlashcard.getCategory();
             Score newScore = new Score();
             newScore.setAnsweredCorrectly(answeredCorrectly);
             newScore.setTotalFlashcards(flashcardsAmount.get());
+            newScore.setCategory(category);
             FlashcardRepository repository = new FlashcardRepository(getApplication());
             repository.insertScore(newScore);
         }
