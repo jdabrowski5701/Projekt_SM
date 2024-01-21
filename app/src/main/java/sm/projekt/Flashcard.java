@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "flashcard")
-public class Flashcard extends BaseObservable {
+public class Flashcard extends BaseObservable implements Cloneable {
     @ColumnInfo(name = "item_id")
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -16,13 +16,20 @@ public class Flashcard extends BaseObservable {
     private boolean isAnsweredCorrectly = false;
 
     public Flashcard() {
-        // Default ID, assuming 0 is a valid default for a non-set ID.
-        this.question = ""; // Empty string as default
-        this.answer = ""; // Empty string as default
-        this.category = ""; // Empty string as default
-        // Default value
+
     }
-    //Gettery i Settery
+    @Override
+    public Flashcard clone() {
+        try {
+            Flashcard copy = (Flashcard) super.clone();
+            return copy;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+
+   // gettery i settery
     public int getId() {
         return id;
     }

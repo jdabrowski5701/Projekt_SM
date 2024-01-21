@@ -132,6 +132,10 @@ public class MainActivity extends AppCompatActivity {
             // Obsługa orientacji pionowej
             buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_slide_up);
         }
+        displayMenu(logoImageView,firstButton,secondButton,thirdButton,lastButton,buttonAnimation);
+    }
+
+    private void displayMenu(ImageView logoImageView,Button firstButton,Button secondButton,Button thirdButton,Button lastButton, Animation buttonAnimation) {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
