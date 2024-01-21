@@ -248,5 +248,5 @@ public class MainActivity extends AppCompatActivity {
             resources.updateConfiguration(configuration, resources.getDisplayMetrics());
         }
     }
-}
+
 
