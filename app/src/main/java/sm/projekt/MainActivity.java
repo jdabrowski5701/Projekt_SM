@@ -170,19 +170,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 4200);
 
-        firstButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
-                startActivity(intent);
-            }
+        firstButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
+            startActivity(intent);
         });
 
-        secondButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCategorySelectionDialog();
-            }
+        secondButton.setOnClickListener(v -> showCategorySelectionDialog());
+
+        thirdButton.setOnClickListener(v -> {
+         Intent intent = new Intent(MainActivity.this, ProgressActivity.class);
+         startActivity(intent);
         });
     }
 

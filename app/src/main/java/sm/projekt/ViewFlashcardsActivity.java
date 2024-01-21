@@ -1,5 +1,6 @@
 package sm.projekt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
     private int answeredCorrectly;
     private Button buttonDontKnow;
     private Button buttonKnow;
+    private int iterationNumber =0 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,11 +82,24 @@ public class ViewFlashcardsActivity extends AppCompatActivity {
             currentFlashcard = flashcardIterator.next();
             adapter.setFlashcards(Collections.singletonList(currentFlashcard)); // Display one flashcard at a time
         } else {
+            iterationNumber++;
             displayIncorrectlyAnsweredFlashcards();
         }
     }
 
     private void displayIncorrectlyAnsweredFlashcards() {
+        if(iterationNumber==1) {
+
+            Score newScore = new Score();
+            newScore.setAnsweredCorrectly(answeredCorrectly);
+            newScore.setTotalFlashcards(flashcardsAmount.get());
+            FlashcardRepository repository = new FlashcardRepository(getApplication());
+            repository.insertScore(newScore);
+        }
+
+
+
+
         List<Flashcard> tempAnsweredCorrectly= new ArrayList<>();
 
         // Check if there are incorrectly answered flashcards
