@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/white"
-        android:text="Answered Correctly: "/>
+        android:text="@string/answered_correctly"/>
 
     <TextView
         android:id="@+id/totalFlashcardsTextView"
@@ -19,13 +19,13 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/white"
-        android:text="Total Flashcards: "/>
+        android:text="@string/total_flashcards"/>
     <TextView
         android:id="@+id/categoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/white"
-        android:text="Category: "/>
+        android:text="@string/category"/>
 
 </LinearLayout>

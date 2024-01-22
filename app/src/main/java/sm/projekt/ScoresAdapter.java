@@ -1,5 +1,6 @@
 package sm.projekt;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,16 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.ScoreViewH
     @Override
     public void onBindViewHolder(@NonNull ScoreViewHolder holder, int position) {
         Score score = scores.get(position);
-        holder.answeredCorrectlyTextView.setText("Answered Correctly: " + score.getAnsweredCorrectly());
-        holder.totalFlashcardsTextView.setText("Total Flashcards: " + score.getTotalFlashcards());
-        holder.categoryTextView.setText("Category: " + score.getCategory());
+        Context context = holder.itemView.getContext();
+
+        String answeredCorrectlyText = context.getString(R.string.answered_correctly);
+        holder.answeredCorrectlyTextView.setText(answeredCorrectlyText + score.getAnsweredCorrectly());
+
+        String totalFlashcardsText = context.getString(R.string.total_flashcards);
+        holder.totalFlashcardsTextView.setText(totalFlashcardsText + score.getTotalFlashcards());
+
+        String categoryText = context.getString(R.string.category);
+        holder.categoryTextView.setText(categoryText + score.getCategory());
     }
 
     @Override

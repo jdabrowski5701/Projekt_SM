@@ -43,4 +43,5 @@ public class SettingsAdapter extends ArrayAdapter<CharSequence> {
 
         return row;
     }
+
 }

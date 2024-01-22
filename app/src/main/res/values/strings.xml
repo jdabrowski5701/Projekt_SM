@@ -12,6 +12,21 @@
     <string name="note_added">Notatka dodana.</string>
     <string name="note_edited">Notatka edytowana.</string>
     <string name="empty_not_saved">Notatka nie została zapisana, ponieważ jest pusta.</string>
+    <string name="hint_question">Pytanie...</string>
+    <string name="hint_answer">Odpowiedź...</string>
+    <string name="select_category">Wybierz kategorię fiszek</string>
+    <string name="start_test">Rozpocznij test</string>
+    <string name="show_definition">Pokaż definicję</string>
+    <string name="enter_word">Wpisz słowo...</string>
+    <string name="know_flashcard">Znam</string>
+    <string name="dont_know_flashcard">Nie znam</string>
+    <string name="make_flashcard">Stwórz Fiszkę</string>
+    <string name="answered_correctly">Odpowiedziano prawidłowo: </string>
+    <string name="total_flashcards">Łącznie fiszek: </string>
+    <string name="category">Kategoria: </string>
+
+
+
 
 
 

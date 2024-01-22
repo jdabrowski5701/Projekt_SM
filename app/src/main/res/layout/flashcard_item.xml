@@ -9,7 +9,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/flashcard_item_border"
+    android:background="@drawable/button_background"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -17,21 +17,23 @@
 
     <TextView
         android:id="@+id/textViewQuestion"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Question"
+        android:text="@string/hint_question"
         android:gravity="center_horizontal"
+        android:padding="7sp"
         android:textSize="30sp" />
 
     <TextView
         android:id="@+id/textViewAnswer"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Answer"
+        android:text="@string/hint_answer"
         android:gravity="center_horizontal"
         android:textSize="30sp"
+        android:padding="7sp"
         android:visibility="gone"/>
 
 </LinearLayout>

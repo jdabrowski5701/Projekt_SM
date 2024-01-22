@@ -12,4 +12,16 @@
     <string name="hint_note_content">Content...</string>
     <string name="note_added">Note added.</string>
     <string name="note_edited">Note edited.</string>
+    <string name="hint_question">Question...</string>
+    <string name="hint_answer">Answer...</string>
+    <string name="select_category">Select category of flashcards</string>
+    <string name="start_test">Start test</string>
+    <string name="enter_word">Enter word...</string>
+    <string name="show_definition">Show Definition</string>
+    <string name="know_flashcard">I know</string>
+    <string name="dont_know_flashcard">I don\'t know</string>
+    <string name="make_flashcard">Make FLashcard</string>
+    <string name="answered_correctly">Answered Correctly:  </string>
+    <string name="total_flashcards">Total flashcards:</string>
+    <string name="category">Category: </string>
 </resources>

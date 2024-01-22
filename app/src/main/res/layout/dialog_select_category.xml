@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wybierz kategorie fiszek" />
+        android:text="@string/select_category" />
 
     <Spinner
         android:id="@+id/spinnerCategories"
@@ -19,5 +19,5 @@
         android:id="@+id/buttonStartTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rozpocznij test" />
+        android:text="@string/start_test" />
 </LinearLayout>
