@@ -1,3 +1,13 @@
 
+t
+java:S11924"WDefine a constant instead of duplicating this literal "ViewFlashcardsActivity" 3 times.(¦¬šÈ8ŞêáõÒ1
+F
+java:S1604„"(Make this anonymous inner class a lambda(„ÑñŒ8äêáõÒ1
+Y
+java:S2589u"7Remove this expression which always evaluates to "true"(Ãëÿÿÿÿÿ8ñíáõÒ1
 z
-java:S1450"XRemove the "viewModel" field and declare it as a local variable in the relevant methods.(ñ¶Ø¥üÿÿÿÿ8ËĞÖÒ1
+java:S1450"]Remove the "buttonDontKnow" field and declare it as a local variable in the relevant methods.(âĞˆ¿8îáõÒ1
+{
+java:S1450"YRemove the "buttonKnow" field and declare it as a local variable in the relevant methods.(»Ôúòıÿÿÿÿ8“îáõÒ1
+z
+java:S1450"XRemove the "viewModel" field and declare it as a local variable in the relevant methods.(ñ¶Ø¥üÿÿÿÿ8ËĞÖÒ1

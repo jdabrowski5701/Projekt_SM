@@ -1,9 +1,5 @@
 package sm.projekt;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,8 +21,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.Locale;
 
@@ -103,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView logoImageView = findViewById(R.id.logoImageView);
         Button firstButton = findViewById(R.id.NewFlashcardButton);
         Button secondButton = findViewById(R.id.NewTestButton);
+        Button middleButton = findViewById(R.id.DictionaryButton);
         Button thirdButton = findViewById(R.id.ProgressButton);
         Button lastButton = findViewById(R.id.NotesButton);
 
@@ -126,16 +126,17 @@ public class MainActivity extends AppCompatActivity {
             buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.landscape_button_slide_up);
             setStartOffsetForButton(firstButton, 0);
             setStartOffsetForButton(secondButton, 300);
-            setStartOffsetForButton(thirdButton, 600);
-            setStartOffsetForButton(lastButton, 900);
+            setStartOffsetForButton(middleButton,600);
+            setStartOffsetForButton(thirdButton, 900);
+            setStartOffsetForButton(lastButton, 1200);
         } else {
             // Obsługa orientacji pionowej
             buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_slide_up);
         }
-        displayMenu(logoImageView,firstButton,secondButton,thirdButton,lastButton,buttonAnimation);
+        displayMenu(logoImageView,firstButton,secondButton, middleButton, thirdButton,lastButton,buttonAnimation);
     }
 
-    private void displayMenu(ImageView logoImageView,Button firstButton,Button secondButton,Button thirdButton,Button lastButton, Animation buttonAnimation) {
+    private void displayMenu(ImageView logoImageView,Button firstButton,Button secondButton,Button middleButton, Button thirdButton,Button lastButton, Animation buttonAnimation) {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -153,6 +154,14 @@ public class MainActivity extends AppCompatActivity {
                 secondButton.startAnimation(buttonAnimation);
             }
         }, 2400);
+        
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                middleButton.setVisibility(View.VISIBLE);
+                middleButton.startAnimation(buttonAnimation);
+            }
+        }, 3300);
 
         handler.postDelayed(new Runnable() {
             @Override
@@ -160,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 thirdButton.setVisibility(View.VISIBLE);
                 thirdButton.startAnimation(buttonAnimation);
             }
-        }, 3300);
+        }, 4200);
 
         handler.postDelayed(new Runnable() {
             @Override
@@ -168,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 lastButton.setVisibility(View.VISIBLE);
                 lastButton.startAnimation(buttonAnimation);
             }
-        }, 4200);
+        }, 5100);
 
         firstButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
@@ -176,6 +185,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         secondButton.setOnClickListener(v -> showCategorySelectionDialog());
+        
+        middleButton.setOnClickListener (v -> {
+            Intent intent = new Intent (MainActivity.this, DictionaryActivity.class);
+            startActivity(intent);
+        });
+        
 
         thirdButton.setOnClickListener(v -> {
          Intent intent = new Intent(MainActivity.this, ProgressActivity.class);

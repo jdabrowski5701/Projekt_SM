@@ -38,9 +38,15 @@
         style="@style/mainButton"/>
 
     <Button
+        android:id="@+id/DictionaryButton"
+        android:text="@string/dictionary_button"
+        android:layout_below="@id/NewTestButton"
+        style="@style/mainButton"/>
+
+    <Button
         android:id="@+id/ProgressButton"
         android:text="@string/progress_button"
-        android:layout_below="@id/NewTestButton"
+        android:layout_below="@id/DictionaryButton"
         style="@style/mainButton"/>
 
     <Button

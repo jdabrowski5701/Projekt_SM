@@ -45,4 +45,10 @@ dependencies {
     implementation("androidx.room:room-runtime:2.4.3")
     annotationProcessor ("androidx.room:room-compiler:2.4.3")
     androidTestImplementation("androidx.room:room-testing:2.4.3")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.google.code.gson:gson:2.8.8")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+
+
+
 }

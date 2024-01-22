@@ -1,8 +1,9 @@
 
 v
-java:S1192"TDefine a constant instead of duplicating this literal "FlashcardRepository" 6 times.(ƒçƒ¼øÿÿÿÿ8¸÷ËĞĞ1
+java:S1192"TDefine a constant instead of duplicating this literal "FlashcardRepository" 6 times.(ÄÌÿÅüÿÿÿÿ8í×ÎüÒ1
 `
-java:S1117">Rename "flashcards" which hides the field declared at line 13.(á«Êãûÿÿÿÿ8Â· Ò1
-X	java:S125"<This block of commented-out lines of code should be removed.(šÛ´8øôÕĞĞ1
-W	java:S125!"<This block of commented-out lines of code should be removed.(ÒÓÈ8ÈŒªÎÑ1
-]	java:S125B"<This block of commented-out lines of code should be removed.(Ôà¨±úÿÿÿÿ8Ï· Ò1
+java:S1117">Rename "flashcards" which hides the field declared at line 15.(½…¡ùÿÿÿÿ8ÉØÎüÒ1
+`
+java:S1117/">Rename "flashcards" which hides the field declared at line 15.(¯¯˜Åüÿÿÿÿ8ĞØÎüÒ1
+Z
+java:S1128"8Remove this unused import 'java.util.concurrent.Future'.(á¬øíıÿÿÿÿ8ÙØÎüÒ1

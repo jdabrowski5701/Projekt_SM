@@ -3,6 +3,7 @@
 
     <string name="new_flashcard_button">New Flashcard</string>
     <string name="new_test_button">New Test</string>
+    <string name="dictionary_button">Dictionary</string>
     <string name="progress_button">Progress</string>
     <string name="notes_button">Notes</string>
     <string name="button_save">Save</string>

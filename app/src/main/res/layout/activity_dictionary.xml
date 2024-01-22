@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="@color/app_background"
+    tools:context=".DictionaryActivity">
+
+    <EditText
+        android:id="@+id/editTextWord"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter word"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/buttonShowDefinition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Definition"
+        android:layout_below="@id/editTextWord"
+        android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/buttonCreateFlashcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make Flashcard"
+        android:layout_below="@id/editTextWord"
+        android:layout_toRightOf="@id/buttonShowDefinition"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDefinitions"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonShowDefinition"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+</RelativeLayout>

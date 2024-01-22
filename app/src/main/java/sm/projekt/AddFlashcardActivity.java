@@ -1,5 +1,6 @@
 package sm.projekt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.graphics.Color;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,11 +35,20 @@ public class AddFlashcardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_flashcard);
 
+        Intent intent = getIntent();
+        String word = intent.getStringExtra("word");
+        String definition = intent.getStringExtra("definition");
+
         editTextQuestion = findViewById(R.id.editTextQuestion);
         editTextAnswer = findViewById(R.id.editTextAnswer);
         spinnerCategory = findViewById(R.id.spinnerCategory);
         buttonSave = findViewById(R.id.buttonSave);
         prototypeFlashcard = new Flashcard();
+
+        // Ustaw dane w polach
+        editTextQuestion.setText(word);
+        editTextAnswer.setText(definition);
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.category_array, android.R.layout.simple_spinner_item);

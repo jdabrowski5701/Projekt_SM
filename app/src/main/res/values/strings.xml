@@ -3,6 +3,7 @@
 
     <string name="new_flashcard_button">Nowa fiszka</string>
     <string name="new_test_button">Nowy test</string>
+    <string name="dictionary_button">Słownik</string>
     <string name="progress_button">Postępy</string>
     <string name="notes_button">Notatki</string>
     <string name="hint_note_title">Tytuł...</string>
