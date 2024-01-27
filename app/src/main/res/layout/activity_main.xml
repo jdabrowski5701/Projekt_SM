@@ -53,7 +53,13 @@
         android:id="@+id/NotesButton"
         android:text="@string/notes_button"
         android:layout_below="@id/ProgressButton"
-        style="@style/mainButton"/>
+        style="@style/mainButton" />
+
+    <Button
+        android:id="@+id/GameButton"
+        android:text="@string/game_button"
+        android:layout_below="@id/NotesButton"
+        style="@style/mainButton" />
 
 
 </RelativeLayout>

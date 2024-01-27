@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         Button middleButton = findViewById(R.id.DictionaryButton);
         Button thirdButton = findViewById(R.id.ProgressButton);
         Button lastButton = findViewById(R.id.NotesButton);
+        Button gameButton = findViewById(R.id.GameButton);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -133,10 +134,10 @@ public class MainActivity extends AppCompatActivity {
             // Obsługa orientacji pionowej
             buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.button_slide_up);
         }
-        displayMenu(logoImageView,firstButton,secondButton, middleButton, thirdButton,lastButton,buttonAnimation);
+        displayMenu(logoImageView,firstButton,secondButton, middleButton, thirdButton,lastButton,buttonAnimation, gameButton);
     }
 
-    private void displayMenu(ImageView logoImageView,Button firstButton,Button secondButton,Button middleButton, Button thirdButton,Button lastButton, Animation buttonAnimation) {
+    private void displayMenu(ImageView logoImageView,Button firstButton,Button secondButton,Button middleButton, Button thirdButton,Button lastButton, Animation buttonAnimation, Button gameButton) {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -179,6 +180,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 5100);
 
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                gameButton.setVisibility(View.VISIBLE);
+                gameButton.startAnimation(buttonAnimation);
+            }
+        }, 6000);
+
         firstButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddFlashcardActivity.class);
             startActivity(intent);
@@ -206,6 +215,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        gameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+        });
+
+    }
+
+    private void startGame() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 
     private void showCategorySelectionDialog() {

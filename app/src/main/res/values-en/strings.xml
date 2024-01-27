@@ -24,4 +24,15 @@
     <string name="answered_correctly">Answered Correctly:  </string>
     <string name="total_flashcards">Total flashcards:</string>
     <string name="category">Category: </string>
+    <string name="game_button">Game </string>
+
+<!--    <string name="instruction">-->
+<!--        Welcome in educational game!\n-->
+<!--        Your goal is to collect most points before losing 3 lives.\n-->
+<!--        The game starts from showing a word in the middle.\n-->
+<!--        You move your character via gyroscope movement.\n-->
+<!--        To choose an answer, you must walk into it before it disappears.\n-->
+<!--        Wrong choice or no choice at all results in loss of a life.\n-->
+<!--        That's all. Good luck.-->
+<!--    </string>-->
 </resources>

@@ -24,6 +24,17 @@
     <string name="answered_correctly">Odpowiedziano prawidłowo: </string>
     <string name="total_flashcards">Łącznie fiszek: </string>
     <string name="category">Kategoria: </string>
+    <string name="game_button">Gra </string>
+
+    <string name="instruction">
+        Witaj w grze edukacyjnej!\n
+        Twoim celem jest zdobyć jak najwięcej punktów zanim stracisz 3 życia.\n
+        Gra zaczyna się od pokazania słowa na środku.\n
+        Ruchem postaci steruje się za pomocą żyroskopu.\n
+        Aby wybrać słowo, musisz w nie wejść zanim wyjdzie poza dolny kraniec mapy.\n
+        Zły wybór albo brak odpowiedzi to utrata jednego życia.\n
+        To wszystko, powodzenia.
+    </string>
 
 
 

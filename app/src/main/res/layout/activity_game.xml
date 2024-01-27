@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Player icon at the bottom -->
+    <ImageView
+        android:id="@+id/playerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/player_icon" />
+
+    <!-- Word in the middle -->
+    <TextView
+        android:id="@+id/word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Sample Word"
+        android:textSize="24sp"
+        android:layout_below="@id/points"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"/>
+
+    <!-- Two words on top (left and right) -->
+    <LinearLayout
+        android:id="@+id/twoWordsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/word">
+
+        <TextView
+            android:id="@+id/leftWord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Left Word"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="#5C00FF"/>
+
+        <TextView
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="|"/>
+
+        <TextView
+            android:id="@+id/rightWord"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Right Word"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="#FF9800"/>
+
+    </LinearLayout>
+
+    <!-- Points in the left upper corner -->
+    <TextView
+        android:id="@+id/points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="16dp"
+        android:text="Points: 0"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/lives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:padding="16dp"
+        android:text="Lives: 3"
+        android:textSize="18sp" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/twoWordsLayout">
+    </FrameLayout>
+
+
+</RelativeLayout>
