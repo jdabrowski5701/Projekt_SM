@@ -8,7 +8,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 import java.util.Random;
 //import android.widget.LinearLayout;
@@ -17,6 +20,7 @@ public class GameView extends View {
 
     public interface OnBallReachEndListener {
         void onBallReachEnd();
+        void onCollisionDetected();
     }
     private OnBallReachEndListener ballReachEndListener;
 
@@ -29,6 +33,12 @@ public class GameView extends View {
     private int screenWidth;
     private int ballSpeed = 5; // Adjust the speed as needed
     private Random random = new Random();
+    private GameActivity gameActivity = new GameActivity();
+    //private ImageView imageView;
+    private int playerIconX;
+    private int playerIconY;
+    private int playerIconSize;
+
     public GameView(Context context) {
         super(context);
         init();
@@ -42,15 +52,8 @@ public class GameView extends View {
     private void init() {
         ballPaint1 = new Paint();
         ballPaint2 = new Paint();
-        //ballPaint1.setColor(Color.RED);
-        //ballPaint2.setColor(Color.RED);
         ballPaint1.setColor(Color.parseColor("#5C00FF"));
         ballPaint2.setColor(Color.parseColor("#FF9800"));
-        // Initialize the initial positions of the balls
-//        ball1X = screenWidth/3;//screenWidth / 3; // Adjust the starting positions as needed
-//        ball1Y = 0;
-//        ball2X = 2*screenWidth/3;//2 * screenWidth / 3;
-//        ball2Y = 0;
     }
 
     public void setOnBallReachEndListener(OnBallReachEndListener listener) {
@@ -70,14 +73,12 @@ public class GameView extends View {
         ball1Y += ballSpeed;
         ball2Y += ballSpeed;
 
-        // Check if the balls have gone off the screen
-//        if (ball1Y > screenHeight) {
-//            ball1Y = 0; // Reset the first ball's position
-//
-//        }
-//        if (ball2Y > screenHeight) {
-//            ball2Y = 0; // Reset the second ball's position
-//        }
+
+        if (isCollisionWithBall(ball1X, ball1Y) || isCollisionWithBall(ball2X, ball2Y)) {
+            if (ballReachEndListener != null) {
+                ballReachEndListener.onCollisionDetected(); // Define this method in your listener
+            }
+        }
 
         if (ball1Y > screenHeight || ball2Y > screenHeight) {
             if (ballReachEndListener != null) {
@@ -141,4 +142,34 @@ public class GameView extends View {
             setBall2X(5);
         }
     }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+
+    private boolean isCollisionWithBall(int ballX, int ballY) {
+//        playerIconSize = 100;
+//        playerIconX = screenWidth/2;
+//        playerIconY = screenHeight-50;
+//        int playX = screenWidth/4;
+//        int playY = screenHeight;
+//        int playI = 100;
+
+        return Math.sqrt(Math.pow(ballX - playerIconX, 2) + Math.pow(ballY - playerIconY, 2)) <= ballRadius + playerIconSize / 2;
+    }
+
+    public void setPlayerPosition(int x, int y) {
+        playerIconX = x;
+        playerIconY = 1620;//y;
+    }
+
+    public void setPlayerSize(int size) {
+        playerIconSize = size+20;
+    }
+
 }

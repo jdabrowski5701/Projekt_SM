@@ -1,12 +1,21 @@
 package sm.projekt;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +40,12 @@ public class GameActivity extends AppCompatActivity {
     private LiveData<List<Flashcard>> flashcardsCopy;
     private LiveData<List<Flashcard>> flashcardsLiveData;
     private GameView gameView;
+
+    private SensorManager sensorManager;
+    private Sensor gyroscopeSensor;
+    private ImageView playerIcon;
+    private FrameLayout frameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +59,28 @@ public class GameActivity extends AppCompatActivity {
 
         flashcardsLiveData = flashcardRepository.findAllFlashcards();
         flashcardsCopy = flashcardsLiveData;
+
+        // add sensor handling
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        playerIcon = findViewById(R.id.playerIcon);
+        playerIcon.setBackgroundColor(Color.YELLOW);
+
         loadFlashcards();
         gameView = new GameView(this);
 
-        FrameLayout frameLayout = findViewById(R.id.frameLayout);
+        frameLayout = findViewById(R.id.frameLayout);
         frameLayout.addView(gameView);
         gameView.setOnBallReachEndListener(new GameView.OnBallReachEndListener() {
             @Override
             public void onBallReachEnd() {
-
+                Log.d("icon ", "przed width view " + gameView.getScreenWidth() + "przed height view " + gameView.getScreenHeight() );
                 loadNextFlashcards();
+                Log.d("icon ", "width view " + gameView.getScreenWidth() + "height view " + gameView.getScreenHeight() );
+            }
+
+            public void onCollisionDetected() {
+                indicateChoice(true); // or false based on the game logic
             }
         });
     }
@@ -111,6 +138,35 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
+    private final SensorEventListener gyroscopeEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            // Gyroscope sensor returns angular speeds in rad/s
+            float angularSpeedX = event.values[0];
+            float angularSpeedY = event.values[1];
+
+            // Use angularSpeedY to move the player icon left or right
+            // You may need to adjust the multiplier for sensitivity
+            float deltaX = angularSpeedY * SENSITIVITY_MULTIPLIER;
+
+            // Update player icon's position
+            float newX = playerIcon.getX() + deltaX;
+            // Ensure the player icon doesn't go off the screen
+            int rightBound = gameView.getScreenWidth() - playerIcon.getWidth();
+            newX = Math.max(0, Math.min(newX, rightBound));
+
+            playerIcon.setX(newX);
+            gameView.setPlayerPosition((int)(playerIcon.getX()), (int) playerIcon.getY());
+            gameView.setPlayerSize(playerIcon.getWidth());
+        }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            // You can ignore this for now
+        }
+    };
+
+    private static final float SENSITIVITY_MULTIPLIER = 15.0f;
+
     private List<Flashcard> usedFlashcards = new ArrayList<>();
     private Random random = new Random();
     private int i=5;
@@ -152,13 +208,14 @@ public class GameActivity extends AppCompatActivity {
         // Optionally, you can add the newCurrentFlashcard to the list of used flashcards
         usedFlashcards.add(newCurrentFlashcard);
 
-        int newSpeed = gameView.getBallSpeed() + 1;//2;
+        indicateChoice(false);
+
+        int newSpeed = gameView.getBallSpeed() + 5;//2;
         gameView.setBallSpeed(newSpeed);
 
         gameView.setBall1X(i);
         gameView.setBall2X(i);
         gameView.checkX();
-        //i+=1;
     }
 
     private Flashcard getNextFlashcard(List<Flashcard> flashcards) {
@@ -171,4 +228,37 @@ public class GameActivity extends AppCompatActivity {
         return nextFlashcard;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(gyroscopeEventListener, gyroscopeSensor, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(gyroscopeEventListener);
+    }
+
+
+    public void indicateChoice(boolean isCorrect) {
+        final int originalColor = frameLayout.getSolidColor(); // Get the original background color
+        int newColor = isCorrect ? Color.GREEN : Color.RED;
+        Log.d("icon ", "icony " + playerIcon.getY() + "iconx " + playerIcon.getX() + "height " + frameLayout.getHeight() + "width " + frameLayout.getWidth() );
+        frameLayout.setBackgroundColor(newColor);
+        new Handler().postDelayed(() -> frameLayout.setBackgroundColor(originalColor), 500); // 500ms delay
+    }
+
+
+    public ImageView getPlayerIcon() {
+        return playerIcon;
+    }
+
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        if (hasFocus) {
+//
+//        }
+//    }
 }
