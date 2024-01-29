@@ -20,24 +20,25 @@ public class GameView extends View {
 
     public interface OnBallReachEndListener {
         void onBallReachEnd();
-        void onCollisionDetected();
+        void onCollisionDetected(String ball);
     }
     private OnBallReachEndListener ballReachEndListener;
 
     private Paint ballPaint1, ballPaint2;
-    private int ballRadius = 20; // Adjust the size as needed
-    private int ball1X, ball1Y; // Position of the first ball
-    private int ball2X, ball2Y; // Position of the second ball
+    private int ballRadius = 20; // size
+    private int ball1X, ball1Y; // pos
+    private int ball2X, ball2Y;
     private int rangeStart1, rangeStop1, rangeStart2, rangeStop2;
     private int screenHeight;
     private int screenWidth;
-    private int ballSpeed = 5; // Adjust the speed as needed
+    private int ballSpeed = 7;
     private Random random = new Random();
     private GameActivity gameActivity = new GameActivity();
     //private ImageView imageView;
     private int playerIconX;
     private int playerIconY;
     private int playerIconSize;
+    private boolean leftBallCorrect;
 
     public GameView(Context context) {
         super(context);
@@ -63,20 +64,23 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // Draw the first ball
+        // draw
         canvas.drawCircle(ball1X, ball1Y, ballRadius, ballPaint1);
-
-        // Draw the second ball
         canvas.drawCircle(ball2X, ball2Y, ballRadius, ballPaint2);
 
-        // Update the positions of the balls
+        // update pos
         ball1Y += ballSpeed;
         ball2Y += ballSpeed;
 
 
-        if (isCollisionWithBall(ball1X, ball1Y) || isCollisionWithBall(ball2X, ball2Y)) {
+        if (isCollisionWithBall(ball1X, ball1Y)) {
             if (ballReachEndListener != null) {
-                ballReachEndListener.onCollisionDetected(); // Define this method in your listener
+                ballReachEndListener.onCollisionDetected("left");
+            }
+        }
+        if (isCollisionWithBall(ball2X, ball2Y)) {
+            if (ballReachEndListener != null) {
+                ballReachEndListener.onCollisionDetected("right");
             }
         }
 
@@ -98,8 +102,8 @@ public class GameView extends View {
         screenWidth = w;
         screenHeight = h;
 
-        // Initialize the initial positions of the balls
-        ball1X = screenWidth / 4; // Adjust the starting positions as needed
+        // initialize
+        ball1X = screenWidth / 4;
         ball1Y = 0;
         ball2X = 3 * screenWidth / 4;
         ball2Y = 0;
@@ -138,7 +142,7 @@ public class GameView extends View {
     }
 
     public void checkX() {
-        if (Math.abs(ball1X-ball2X) < 20) {
+        if (Math.abs(ball1X-ball2X) < 100) {
             setBall2X(5);
         }
     }
@@ -169,7 +173,14 @@ public class GameView extends View {
     }
 
     public void setPlayerSize(int size) {
-        playerIconSize = size+20;
+        playerIconSize = size;
     }
 
+    public void setLeftBallCorrect(boolean is) {
+        leftBallCorrect = is;
+    }
+
+    public boolean getLeftBallCorrect() {
+        return leftBallCorrect;
+    }
 }

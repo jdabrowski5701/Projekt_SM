@@ -45,6 +45,7 @@ public class GameActivity extends AppCompatActivity {
     private Sensor gyroscopeSensor;
     private ImageView playerIcon;
     private FrameLayout frameLayout;
+    private boolean correctCollision;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,39 +65,44 @@ public class GameActivity extends AppCompatActivity {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         playerIcon = findViewById(R.id.playerIcon);
-        playerIcon.setBackgroundColor(Color.YELLOW);
+        //playerIcon.setBackgroundColor(Color.YELLOW);
 
         loadFlashcards();
         gameView = new GameView(this);
 
         frameLayout = findViewById(R.id.frameLayout);
         frameLayout.addView(gameView);
+
         gameView.setOnBallReachEndListener(new GameView.OnBallReachEndListener() {
             @Override
             public void onBallReachEnd() {
                 Log.d("icon ", "przed width view " + gameView.getScreenWidth() + "przed height view " + gameView.getScreenHeight() );
+                correctCollision = false;
                 loadNextFlashcards();
                 Log.d("icon ", "width view " + gameView.getScreenWidth() + "height view " + gameView.getScreenHeight() );
             }
 
-            public void onCollisionDetected() {
-                indicateChoice(true); // or false based on the game logic
+            public void onCollisionDetected(String ball) {
+                if (ball.equals("left") && gameView.getLeftBallCorrect() || ball.equals("right") && !gameView.getLeftBallCorrect()) {
+                    correctCollision = true;
+                    indicateChoice(true);
+                } else {
+//                    correctCollision = false;
+                    indicateChoice(false);
+                }
             }
         });
     }
 
     private void showInstructionPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("How to Play"); // Set the title of the popup
+        builder.setTitle("How to Play");
 
-        // Inflate the instruction_popup.xml layout
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.instruction_popup, null);
 
-        // Set the content of the popup to the inflated layout
         builder.setView(dialogView);
 
-        // Add a button to close the popup
         builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -110,26 +116,26 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void loadFlashcards() {
-        // Observe the LiveData to get updates when flashcards change
         flashcardsCopy.observe(this, new Observer<List<Flashcard>>() {
             @Override
             public void onChanged(List<Flashcard> flashcards) {
-                // Handle the list of flashcards here
                 if (flashcards != null && !flashcards.isEmpty()) {
-                    // Flashcards are available, you can use them in your game
-                    // For example, you can start the game with the first flashcard
+                    // starting
                     Flashcard firstFlashcard = flashcards.get(0);
 
                     currentWord.setText(firstFlashcard.getQuestion());
 
                     Random random = new Random();
+                    // select random question
                     int questionNumber = random.nextInt(flashcards.size() - 1)+1;
                     boolean isLeft = random.nextBoolean();
                     if (isLeft) {
                         leftWord.setText(firstFlashcard.getAnswer());
+                        gameView.setLeftBallCorrect(true);
                         rightWord.setText(flashcards.get(questionNumber).getAnswer());
                     } else {
                         rightWord.setText(firstFlashcard.getAnswer());
+                        gameView.setLeftBallCorrect(false);
                         leftWord.setText(flashcards.get(questionNumber).getAnswer());
                     }
                     usedFlashcards.add(firstFlashcard);
@@ -141,17 +147,15 @@ public class GameActivity extends AppCompatActivity {
     private final SensorEventListener gyroscopeEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            // Gyroscope sensor returns angular speeds in rad/s
+            // rad/s
             float angularSpeedX = event.values[0];
             float angularSpeedY = event.values[1];
 
-            // Use angularSpeedY to move the player icon left or right
-            // You may need to adjust the multiplier for sensitivity
+            // move
             float deltaX = angularSpeedY * SENSITIVITY_MULTIPLIER;
 
-            // Update player icon's position
+            // Update pos
             float newX = playerIcon.getX() + deltaX;
-            // Ensure the player icon doesn't go off the screen
             int rightBound = gameView.getScreenWidth() - playerIcon.getWidth();
             newX = Math.max(0, Math.min(newX, rightBound));
 
@@ -161,7 +165,7 @@ public class GameActivity extends AppCompatActivity {
         }
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
-            // You can ignore this for now
+            //
         }
     };
 
@@ -171,7 +175,6 @@ public class GameActivity extends AppCompatActivity {
     private Random random = new Random();
     private int i=5;
 
-    //when the ball falls of for the first time, the left and right word do not change
     private void loadNextFlashcards() {
         List<Flashcard> flashcards = flashcardsLiveData.getValue();
         if (flashcards == null || flashcards.isEmpty()) {
@@ -189,9 +192,11 @@ public class GameActivity extends AppCompatActivity {
         boolean isLeft = random.nextBoolean();
         if (isLeft) {
             leftWord.setText(newCurrentFlashcard.getAnswer());
+            gameView.setLeftBallCorrect(true);
             rightWord.setText(flashcards.get(random.nextInt(flashcards.size())).getAnswer());
         } else {
             rightWord.setText(newCurrentFlashcard.getAnswer());
+            gameView.setLeftBallCorrect(false);
             leftWord.setText(flashcards.get(random.nextInt(flashcards.size())).getAnswer());
         }
 //        Flashcard leftFlashcard = flashcards.get(random.nextInt(flashcards.size()));
@@ -200,17 +205,15 @@ public class GameActivity extends AppCompatActivity {
 //            rightFlashcard = flashcards.get(random.nextInt(flashcards.size()));
 //        } while (rightFlashcard.equals(leftFlashcard));
 
-        // Now update the TextViews
         currentWord.setText(newCurrentFlashcard.getQuestion());
 //        leftWord.setText(leftFlashcard.getAnswer());
 //        rightWord.setText(rightFlashcard.getAnswer());
 
-        // Optionally, you can add the newCurrentFlashcard to the list of used flashcards
         usedFlashcards.add(newCurrentFlashcard);
 
         indicateChoice(false);
 
-        int newSpeed = gameView.getBallSpeed() + 5;//2;
+        int newSpeed = gameView.getBallSpeed() + 2;//2;
         gameView.setBallSpeed(newSpeed);
 
         gameView.setBall1X(i);
@@ -242,10 +245,14 @@ public class GameActivity extends AppCompatActivity {
 
 
     public void indicateChoice(boolean isCorrect) {
-        final int originalColor = frameLayout.getSolidColor(); // Get the original background color
-        int newColor = isCorrect ? Color.GREEN : Color.RED;
+        final int originalColor = frameLayout.getSolidColor();
+        int newColor = Color.RED;
+        if (isCorrect) newColor = isCorrect ? Color.GREEN : Color.RED;
         Log.d("icon ", "icony " + playerIcon.getY() + "iconx " + playerIcon.getX() + "height " + frameLayout.getHeight() + "width " + frameLayout.getWidth() );
-        frameLayout.setBackgroundColor(newColor);
+        if (frameLayout.getSolidColor() == Color.GREEN) {
+            new Handler().postDelayed(() -> frameLayout.setBackgroundColor(originalColor), 500);
+            correctCollision = true;
+        } else frameLayout.setBackgroundColor(newColor);
         new Handler().postDelayed(() -> frameLayout.setBackgroundColor(originalColor), 500); // 500ms delay
     }
 

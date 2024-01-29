@@ -28,11 +28,14 @@
 
     <string name="instruction">
         Witaj w grze edukacyjnej!\n
-        Twoim celem jest zdobyć jak najwięcej punktów zanim stracisz 3 życia.\n
+        Twoim celem jest zdobyć jak najwięcej\n
+        punktów zanim stracisz 3 życia.\n
         Gra zaczyna się od pokazania słowa na środku.\n
         Ruchem postaci steruje się za pomocą żyroskopu.\n
-        Aby wybrać słowo, musisz w nie wejść zanim wyjdzie poza dolny kraniec mapy.\n
-        Zły wybór albo brak odpowiedzi to utrata jednego życia.\n
+        Aby wybrać słowo, musisz w nie wejść\n
+        zanim wyjdzie poza dolny kraniec mapy.\n
+        Zły wybór albo brak odpowiedzi to utrata\n
+        jednego życia.\n
         To wszystko, powodzenia.
     </string>
 
